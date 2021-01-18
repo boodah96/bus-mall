@@ -7,7 +7,10 @@ function Product(name,src){
     this.shown=0;
     this.votes=0;
     Product.prototype.allProducts.push(this);
+   
 }
+var allProduct=[];
+var allVotes=[];
 //creat object for each image product
 Product.prototype.allProducts=[];
 console.log(Product.prototype.allProducts);
@@ -31,7 +34,9 @@ new Product('unicorn','images/unicorn.jpg');
 new Product('usb','images/usb.gif');
 new Product('water-can','images/water-can.jpg');
 new Product('wine-glass','images/wine-glass.jpg');
-console.log(Product.prototype.allProducts);
+
+  
+
 
 //Identify element
 var divImages=document.getElementById('divImages');
@@ -57,6 +62,9 @@ function result(event){
             productResult = document.createElement('li');
             productResult.textContent = Product.prototype.allProducts[i].productName + ' had '+  Product.prototype.allProducts[i].votes + ' votes'+'  and was seen '+ Product.prototype.allProducts[i].shown+' times.';
             resultsList.appendChild(productResult);
+            allProduct[i]=Product.prototype.allProducts[i].productName ;
+            allVotes[i]=Product.prototype.allProducts[i].votes;
+            renderChart();
           }
           divImages.removeEventListener('click',UserClick);
 
@@ -78,7 +86,7 @@ var firstProductImageIndex=0;
 var secondProductImageIndex=0;
 var thirdProductImageIndex=0;
   
-
+renderChart();
 function UserClick(event){
     
 
@@ -119,9 +127,10 @@ function renderThreeRandomImages(){
     } while( thirdProductImageIndex === firstProductImageIndex|| thirdProductImageIndex === secondProductImageIndex);
   
     console.log(firstProductImageIndex,secondProductImageIndex,thirdProductImageIndex);
-    lastClick=[firstProductImageIndex,secondProductImageIndex,thirdProductImageIndex];
     
-
+     var lastRoundFirst=firstProductImageIndex;
+     var lastRoundSecond=secondProductImageIndex;
+     var lastRoundThird=thirdProductImageIndex;
 
     console.log( Product.prototype.allProducts[firstProductImageIndex].source);
     firstProductImage.src= Product.prototype.allProducts[firstProductImageIndex].source;
@@ -139,3 +148,42 @@ function renderThreeRandomImages(){
 function generateRandomIndex(){
     return Math.floor(Math.random() * (Product.prototype.allProducts.length));
   }
+
+function renderChart(){
+  var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: allProduct,
+        datasets: [{
+            label: '# of Votes',
+            data: allVotes,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: false
+                }
+            }]
+        }
+    }
+});}
