@@ -34,64 +34,63 @@ new Product('wine-glass','images/wine-glass.jpg');
 console.log(Product.prototype.allProducts);
 
 //Identify element
-var firstProductImage=document.getElementById('firstProductImage');
-var secondProductImage=document.getElementById('secondProductImage');
-var thirdProductImage=document.getElementById('thirdProductImage');
+var divImages=document.getElementById('divImages');
+divImages.addEventListener('click',UserClick);
+
+var maxAttempts=document.getElementById('maxAttempt');
+maxAttempts.addEventListener('submit',userMaxAttempts);
+function userMaxAttempts(event){
+  event.preventDefault()
+  console.log(event.target.rounds.value); 
+  defaultMaxAttempts= event.target.rounds.value;
+
+}
+
+var finalResult=document.getElementById('result');
+finalResult.addEventListener('submit',result);
+function result(event){
+  event.preventDefault();
+
+    var resultsList = document.getElementById('results-list');
+          var productResult;
+          for(var i = 0; i < Product.prototype.allProducts.length; i++){
+            productResult = document.createElement('li');
+            productResult.textContent = Product.prototype.allProducts[i].productName + ' had '+  Product.prototype.allProducts[i].votes + ' votes'+'  and was seen '+ Product.prototype.allProducts[i].shown+' times.';
+            resultsList.appendChild(productResult);
+          }
+          divImages.removeEventListener('click',UserClick);
+
+    
+ 
+}
+
+
 var defaultMaxAttempts=25;
 var AttemptsCounter=0;
 renderThreeRandomImages();
 console.log('befor',lastClick)
 
 
-firstProductImage.addEventListener('click',UserClick);
-secondProductImage.addEventListener('click',UserClick);
-thirdProductImage.addEventListener('click',UserClick);
+
+
 
 var firstProductImageIndex=0;
 var secondProductImageIndex=0;
 var thirdProductImageIndex=0;
-
-
-function handleUserClick(event){
-    userAttemptsCounter++;
   
-    if(userAttemptsCounter <= maxAttempts){
-      if(event.target.id === 'left-image'){
-        GoatImage.prototype.allImages[leftImageIndex].votes++;
-      } else {
-        GoatImage.prototype.allImages[rightImageIndex].votes++;
-      }
-      renderTwoRandomImages();
-  
-    } else {
-      // handle end of voting
-      var resultsList = document.getElementById('results-list');
-      var goatResult;
-      for(var i = 0; i < GoatImage.prototype.allImages.length; i++){
-        goatResult = document.createElement('li');
-        goatResult.textContent = GoatImage.prototype.allImages[i].name + 'has '+ GoatImage.prototype.allImages[i].votes + ' votes';
-        resultsList.appendChild(goatResult);
-      }
-      rightImageElement.removeEventListener('click',handleUserClick);
-      leftImageElement.removeEventListener('click',handleUserClick);
-  
-    }
-  
-  }
-  
-  
-
-
-
 
 function UserClick(event){
-    AttemptsCounter++;
+    
+
 console.log('AttemptsCounter :',AttemptsCounter+"/"+defaultMaxAttempts)
+AttemptsCounter++;   
+
 if(AttemptsCounter <= defaultMaxAttempts){
     console.log(typeof (event.target.id));
     if(event.target.id === 'firstProductImage'){
         
             Product.prototype.allProducts[firstProductImageIndex].votes++;
+            
         } 
         if(event.target.id === 'secondProductImage'){
             Product.prototype.allProducts[secondProductImageIndex].votes++;
@@ -100,7 +99,7 @@ if(AttemptsCounter <= defaultMaxAttempts){
             Product.prototype.allProducts[thirdProductImageIndex].votes++;
 
         }      
-     renderThreeRandomImages();      
+     renderThreeRandomImages(); 
 
     }
     
@@ -128,9 +127,10 @@ function renderThreeRandomImages(){
     firstProductImage.src= Product.prototype.allProducts[firstProductImageIndex].source;
     secondProductImage.src = Product.prototype.allProducts[secondProductImageIndex].source;
     thirdProductImage.src = Product.prototype.allProducts[thirdProductImageIndex].source;
+    if (AttemptsCounter < defaultMaxAttempts-1){
     Product.prototype.allProducts[firstProductImageIndex].shown++;
     Product.prototype.allProducts[secondProductImageIndex].shown++;
-    Product.prototype.allProducts[thirdProductImageIndex].shown++;
+    Product.prototype.allProducts[thirdProductImageIndex].shown++;}
 
     
   }

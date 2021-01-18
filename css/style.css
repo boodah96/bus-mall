@@ -1,6 +1,10 @@
 div img{
     width: 300px;
     height: 300px;
-    float: left;
     margin-left:20px ;
+    display: inline;
+    
+}
+div{
+    display: block;
 }
