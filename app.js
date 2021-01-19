@@ -9,8 +9,11 @@ function Product(name,src){
     Product.prototype.allProducts.push(this);
    
 }
+
+
 var allProduct=[];
 var allVotes=[];
+var allShown=[];
 //creat object for each image product
 Product.prototype.allProducts=[];
 console.log(Product.prototype.allProducts);
@@ -45,9 +48,13 @@ divImages.addEventListener('click',UserClick);
 var maxAttempts=document.getElementById('maxAttempt');
 maxAttempts.addEventListener('submit',userMaxAttempts);
 function userMaxAttempts(event){
+
   event.preventDefault()
+
   console.log(event.target.rounds.value); 
   defaultMaxAttempts= event.target.rounds.value;
+  
+
 
 }
 
@@ -64,6 +71,7 @@ function result(event){
             resultsList.appendChild(productResult);
             allProduct[i]=Product.prototype.allProducts[i].productName ;
             allVotes[i]=Product.prototype.allProducts[i].votes;
+            allShown[i]=Product.prototype.allProducts[i].shown;
             renderChart();
           }
           divImages.removeEventListener('click',UserClick);
@@ -75,8 +83,8 @@ function result(event){
 
 var defaultMaxAttempts=25;
 var AttemptsCounter=0;
+
 renderThreeRandomImages();
-console.log('befor',lastClick)
 
 
 
@@ -86,7 +94,6 @@ var firstProductImageIndex=0;
 var secondProductImageIndex=0;
 var thirdProductImageIndex=0;
   
-renderChart();
 function UserClick(event){
     
 
@@ -108,29 +115,37 @@ if(AttemptsCounter <= defaultMaxAttempts){
 
         }      
      renderThreeRandomImages(); 
-
+    
     }
     
 
 }
-var lastClick=[0,0,0];
 
+var lastRoundFirst=-3;
+var lastRoundSecond=-2;
+var lastRoundThird=-1;
 function renderThreeRandomImages(){
-    firstProductImageIndex = generateRandomIndex();
+    var lastClick=[lastRoundFirst,lastRoundSecond,lastRoundThird];
+    do{
+        firstProductImageIndex = generateRandomIndex();
+    } while( lastClick.includes(firstProductImageIndex));
+    lastRoundFirst=firstProductImageIndex;
+    lastClick.push(firstProductImageIndex);
   
     do{
         secondProductImageIndex = generateRandomIndex();
-    } while( secondProductImageIndex=== firstProductImageIndex);
+    } while( lastClick.includes(secondProductImageIndex));
+    lastRoundSecond=secondProductImageIndex;
+    lastClick.push(secondProductImageIndex);
+
 
     do{
         thirdProductImageIndex = generateRandomIndex();
-    } while( thirdProductImageIndex === firstProductImageIndex|| thirdProductImageIndex === secondProductImageIndex);
+    } while(lastClick.includes(thirdProductImageIndex));
+    lastRoundThird=thirdProductImageIndex;
+
   
-    console.log(firstProductImageIndex,secondProductImageIndex,thirdProductImageIndex);
     
-     var lastRoundFirst=firstProductImageIndex;
-     var lastRoundSecond=secondProductImageIndex;
-     var lastRoundThird=thirdProductImageIndex;
 
     console.log( Product.prototype.allProducts[firstProductImageIndex].source);
     firstProductImage.src= Product.prototype.allProducts[firstProductImageIndex].source;
@@ -143,7 +158,7 @@ function renderThreeRandomImages(){
 
     
   }
-  
+
   renderThreeRandomImages();
 function generateRandomIndex(){
     return Math.floor(Math.random() * (Product.prototype.allProducts.length));
@@ -159,23 +174,30 @@ var myChart = new Chart(ctx, {
             label: '# of Votes',
             data: allVotes,
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+               'rgba(99, 99, 0, 0.2)'
+               
             ],
             borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+                
+                
             ],
             borderWidth: 1
-        }]
+        },{
+            label: '# of views',
+            data: allShown,
+            backgroundColor: 
+               'green'
+               
+            ,
+            borderColor: [
+                
+                
+            ],
+            borderWidth: 1
+        }
+    
+    
+    ]
     },
     options: {
         scales: {
@@ -186,4 +208,8 @@ var myChart = new Chart(ctx, {
             }]
         }
     }
-});}
+});
+myChart.canvas.parentNode.style.width = '600px';
+    myChart.canvas.parentNode.style.height = '20px';
+
+}
