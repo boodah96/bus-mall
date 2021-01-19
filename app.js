@@ -112,6 +112,10 @@ if(AttemptsCounter <= defaultMaxAttempts){
         } 
         if(event.target.id === 'thirdProductImage'){
             Product.prototype.allProducts[thirdProductImageIndex].votes++;
+            
+            Product.prototype.allProducts[firstProductImageIndex].shown++;
+    Product.prototype.allProducts[secondProductImageIndex].shown++;
+    Product.prototype.allProducts[thirdProductImageIndex].shown++;
 
         }      
      renderThreeRandomImages(); 
@@ -151,11 +155,7 @@ function renderThreeRandomImages(){
     firstProductImage.src= Product.prototype.allProducts[firstProductImageIndex].source;
     secondProductImage.src = Product.prototype.allProducts[secondProductImageIndex].source;
     thirdProductImage.src = Product.prototype.allProducts[thirdProductImageIndex].source;
-    if (AttemptsCounter < defaultMaxAttempts-1){
-    Product.prototype.allProducts[firstProductImageIndex].shown++;
-    Product.prototype.allProducts[secondProductImageIndex].shown++;
-    Product.prototype.allProducts[thirdProductImageIndex].shown++;}
-
+   
     
   }
 
