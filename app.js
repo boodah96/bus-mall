@@ -37,6 +37,7 @@ new Product('unicorn','images/unicorn.jpg');
 new Product('usb','images/usb.gif');
 new Product('water-can','images/water-can.jpg');
 new Product('wine-glass','images/wine-glass.jpg');
+// 
 
   
 
@@ -62,11 +63,14 @@ var finalResult=document.getElementById('result');
 finalResult.addEventListener('submit',result);
 function result(event){
   event.preventDefault();
+  //recall data from locall
+  Product.prototype.allProducts=JSON.parse(localStorage.getItem('allProduct'));
 
     var resultsList = document.getElementById('results-list');
           var productResult;
           for(var i = 0; i < Product.prototype.allProducts.length; i++){
             productResult = document.createElement('li');
+
             productResult.textContent = Product.prototype.allProducts[i].productName + ' had '+  Product.prototype.allProducts[i].votes + ' votes'+'  and was seen '+ Product.prototype.allProducts[i].shown+' times.';
             resultsList.appendChild(productResult);
             allProduct[i]=Product.prototype.allProducts[i].productName ;
@@ -98,9 +102,10 @@ function UserClick(event){
     
 
 console.log('AttemptsCounter :',AttemptsCounter+"/"+defaultMaxAttempts)
-AttemptsCounter++;   
+console.log('befor',AttemptsCounter)
 
-if(AttemptsCounter <= defaultMaxAttempts){
+
+if(AttemptsCounter <defaultMaxAttempts){
     console.log(typeof (event.target.id));
     if(event.target.id === 'firstProductImage'){
         
@@ -113,10 +118,28 @@ if(AttemptsCounter <= defaultMaxAttempts){
         if(event.target.id === 'thirdProductImage'){
             Product.prototype.allProducts[thirdProductImageIndex].votes++;
 
-        }      
+        }   
+        AttemptsCounter++;   
+
+        localStorage.setItem('counter',AttemptsCounter);
+        AttemptsCounter=JSON.parse(localStorage.getItem('counter'))
+
+     localStorage.setItem('allProduct',JSON.stringify(Product.prototype.allProducts))
      renderThreeRandomImages(); 
-    
+     if(AttemptsCounter ==(defaultMaxAttempts)){ 
+        document.getElementById('ViewResults').removeAttribute("disabled");
+        divImages.removeEventListener('click',UserClick);
+
+}
+
     }
+else    {
+        // localStorage.removeItem('counter')
+        
+
+    }
+
+
     
 
 }
@@ -125,7 +148,10 @@ var lastRoundFirst=-3;
 var lastRoundSecond=-2;
 var lastRoundThird=-1;
 function renderThreeRandomImages(){
-    var lastClick=[lastRoundFirst,lastRoundSecond,lastRoundThird];
+    
+    
+        var lastClick=[lastRoundFirst,lastRoundSecond,lastRoundThird];
+        if(AttemptsCounter <(defaultMaxAttempts-1)){
     do{
         firstProductImageIndex = generateRandomIndex();
     } while( lastClick.includes(firstProductImageIndex));
@@ -145,19 +171,18 @@ function renderThreeRandomImages(){
     lastRoundThird=thirdProductImageIndex;
 
   
-    
 
     console.log( Product.prototype.allProducts[firstProductImageIndex].source);
     firstProductImage.src= Product.prototype.allProducts[firstProductImageIndex].source;
     secondProductImage.src = Product.prototype.allProducts[secondProductImageIndex].source;
     thirdProductImage.src = Product.prototype.allProducts[thirdProductImageIndex].source;
-    if (AttemptsCounter < defaultMaxAttempts-1){
+    
     Product.prototype.allProducts[firstProductImageIndex].shown++;
     Product.prototype.allProducts[secondProductImageIndex].shown++;
-    Product.prototype.allProducts[thirdProductImageIndex].shown++;}
+    Product.prototype.allProducts[thirdProductImageIndex].shown++;}}
 
     
-  }
+  
 
   renderThreeRandomImages();
 function generateRandomIndex(){
