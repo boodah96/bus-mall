@@ -173,7 +173,7 @@ function renderThreeRandomImages(){
     thirdProductImage.src = Product.prototype.allProducts[thirdProductImageIndex].source;
     
 
-    
+    var x=0;
   }
 
   renderThreeRandomImages();
