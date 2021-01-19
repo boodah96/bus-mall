@@ -37,7 +37,6 @@ new Product('unicorn','images/unicorn.jpg');
 new Product('usb','images/usb.gif');
 new Product('water-can','images/water-can.jpg');
 new Product('wine-glass','images/wine-glass.jpg');
-// 
 
   
 
@@ -63,14 +62,11 @@ var finalResult=document.getElementById('result');
 finalResult.addEventListener('submit',result);
 function result(event){
   event.preventDefault();
-  //recall data from locall
-  Product.prototype.allProducts=JSON.parse(localStorage.getItem('allProduct'));
 
     var resultsList = document.getElementById('results-list');
           var productResult;
           for(var i = 0; i < Product.prototype.allProducts.length; i++){
             productResult = document.createElement('li');
-
             productResult.textContent = Product.prototype.allProducts[i].productName + ' had '+  Product.prototype.allProducts[i].votes + ' votes'+'  and was seen '+ Product.prototype.allProducts[i].shown+' times.';
             resultsList.appendChild(productResult);
             allProduct[i]=Product.prototype.allProducts[i].productName ;
@@ -102,9 +98,7 @@ function UserClick(event){
     
 
 
-
 if(AttemptsCounter < defaultMaxAttempts){
-
     console.log(typeof (event.target.id));
     if(event.target.id === 'firstProductImage'){
         
@@ -134,15 +128,9 @@ if(AttemptsCounter < defaultMaxAttempts){
              }
 
 
-
+             
+    
     }
-else    {
-        // localStorage.removeItem('counter')
-        
-
-    }
-
-
     
 
 }
@@ -152,13 +140,11 @@ var lastRoundSecond=-2;
 var lastRoundThird=-1;
 function renderThreeRandomImages(){
 
-
    
    
 
 
     var lastClick=[lastRoundFirst,lastRoundSecond,lastRoundThird];
-
     do{
         firstProductImageIndex = generateRandomIndex();
     } while( lastClick.includes(firstProductImageIndex));
@@ -178,6 +164,8 @@ function renderThreeRandomImages(){
     } while(lastClick.includes(thirdProductImageIndex));
     lastRoundThird=thirdProductImageIndex;
 
+    
+    
 
     console.log( Product.prototype.allProducts[firstProductImageIndex].source);
     firstProductImage.src= Product.prototype.allProducts[firstProductImageIndex].source;
@@ -185,9 +173,8 @@ function renderThreeRandomImages(){
     thirdProductImage.src = Product.prototype.allProducts[thirdProductImageIndex].source;
     
 
-
     
-  
+  }
 
   renderThreeRandomImages();
 function generateRandomIndex(){
