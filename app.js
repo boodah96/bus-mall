@@ -65,6 +65,8 @@ var finalResult=document.getElementById('result');
 finalResult.addEventListener('submit',result);
 function result(event){
   event.preventDefault();
+  saveData();
+
 
     var resultsList = document.getElementById('results-list');
           var productResult;
@@ -77,7 +79,7 @@ function result(event){
             allShown[i]=Product.prototype.allProducts[i].shown;
             renderChart();
           }
-          localStorage.clear();
+          localStorage.removeItem('AttemptsCounter');
           divImages.removeEventListener('click',UserClick);
 
     
@@ -89,7 +91,12 @@ var defaultMaxAttempts=25;
 var AttemptsCounter=0;
 
 
+function saveData(){
+    Product.prototype.allProducts=JSON.parse(localStorage.getItem('allProducts'));
 
+
+
+}
 
 
 
@@ -101,7 +108,7 @@ var thirdProductImageIndex=-1;
   if(storedCounter>0)
   {
       AttemptsCounter  =storedCounter;
-      Product.prototype.allProducts=JSON.parse(localStorage.getItem('allProducts'));
+      saveData();
 
   }
   
@@ -189,7 +196,7 @@ function renderThreeRandomImages(){
     thirdProductImage.src = Product.prototype.allProducts[thirdProductImageIndex].source;
     
 
-    var x=0;
+    
   }
 
   renderThreeRandomImages();
