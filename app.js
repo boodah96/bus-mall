@@ -156,8 +156,15 @@ function renderThreeRandomImages(){
     secondProductImage.src = Product.prototype.allProducts[secondProductImageIndex].source;
     thirdProductImage.src = Product.prototype.allProducts[thirdProductImageIndex].source;
    
-    
+
+    Product.prototype.allProducts[firstProductImageIndex].shown++;
+    Product.prototype.allProducts[secondProductImageIndex].shown++;
+    Product.prototype.allProducts[thirdProductImageIndex].shown++;}}
+
+
+
   }
+
 
   renderThreeRandomImages();
 function generateRandomIndex(){
