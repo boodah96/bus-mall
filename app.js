@@ -90,17 +90,15 @@ renderThreeRandomImages();
 
 
 
-var firstProductImageIndex=0;
-var secondProductImageIndex=0;
-var thirdProductImageIndex=0;
+var firstProductImageIndex=-1;
+var secondProductImageIndex=-1;
+var thirdProductImageIndex=-1;
   
 function UserClick(event){
     
 
-console.log('AttemptsCounter :',AttemptsCounter+"/"+defaultMaxAttempts)
-AttemptsCounter++;   
 
-if(AttemptsCounter <= defaultMaxAttempts){
+if(AttemptsCounter < defaultMaxAttempts){
     console.log(typeof (event.target.id));
     if(event.target.id === 'firstProductImage'){
         
@@ -112,13 +110,25 @@ if(AttemptsCounter <= defaultMaxAttempts){
         } 
         if(event.target.id === 'thirdProductImage'){
             Product.prototype.allProducts[thirdProductImageIndex].votes++;
-            
-            Product.prototype.allProducts[firstProductImageIndex].shown++;
-    Product.prototype.allProducts[secondProductImageIndex].shown++;
-    Product.prototype.allProducts[thirdProductImageIndex].shown++;
+        } 
+        Product.prototype.allProducts[thirdProductImageIndex].shown++;
+        Product.prototype.allProducts[secondProductImageIndex].shown++;
+        Product.prototype.allProducts[firstProductImageIndex].shown++;
+            AttemptsCounter++;  
+            console.log('AttemptsCounter :',AttemptsCounter+"/"+defaultMaxAttempts)
 
-        }      
-     renderThreeRandomImages(); 
+            if(AttemptsCounter == defaultMaxAttempts ){
+               document.getElementById ('ViewResults').removeAttribute('disabled')
+               divImages.removeEventListener('click',UserClick);
+
+            }
+            if(AttemptsCounter < defaultMaxAttempts ){
+                renderThreeRandomImages(); 
+ 
+             }
+
+
+             
     
     }
     
@@ -129,12 +139,18 @@ var lastRoundFirst=-3;
 var lastRoundSecond=-2;
 var lastRoundThird=-1;
 function renderThreeRandomImages(){
+
+   
+   
+
+
     var lastClick=[lastRoundFirst,lastRoundSecond,lastRoundThird];
     do{
         firstProductImageIndex = generateRandomIndex();
     } while( lastClick.includes(firstProductImageIndex));
     lastRoundFirst=firstProductImageIndex;
     lastClick.push(firstProductImageIndex);
+
   
     do{
         secondProductImageIndex = generateRandomIndex();
@@ -148,22 +164,17 @@ function renderThreeRandomImages(){
     } while(lastClick.includes(thirdProductImageIndex));
     lastRoundThird=thirdProductImageIndex;
 
-  
+    
     
 
     console.log( Product.prototype.allProducts[firstProductImageIndex].source);
     firstProductImage.src= Product.prototype.allProducts[firstProductImageIndex].source;
     secondProductImage.src = Product.prototype.allProducts[secondProductImageIndex].source;
     thirdProductImage.src = Product.prototype.allProducts[thirdProductImageIndex].source;
-   
+    
 
-    Product.prototype.allProducts[firstProductImageIndex].shown++;
-    Product.prototype.allProducts[secondProductImageIndex].shown++;
-    Product.prototype.allProducts[thirdProductImageIndex].shown++;
-
-
-
-}
+    var x=0;
+  }
 
   renderThreeRandomImages();
 function generateRandomIndex(){
