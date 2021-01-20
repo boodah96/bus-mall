@@ -159,12 +159,11 @@ function renderThreeRandomImages(){
 
     Product.prototype.allProducts[firstProductImageIndex].shown++;
     Product.prototype.allProducts[secondProductImageIndex].shown++;
-    Product.prototype.allProducts[thirdProductImageIndex].shown++;}}
+    Product.prototype.allProducts[thirdProductImageIndex].shown++;
 
 
 
-  }
-
+}
 
   renderThreeRandomImages();
 function generateRandomIndex(){
