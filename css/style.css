@@ -1,11 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+header{
+    font-family: 'Lobster', cursive;
+    align-items: center;
+    position: relative;
+    
+}
+#logo{
+    width: 200px;
+    height: 75px;
+    float: left;
+    margin-right: 25px;
+}
+
+main{
+    font-family: 'Lobster', cursive;
+
+    position: relative;
+
+}
+#format{
+    width: 50%;
+    margin: 30px 25%;
+    color: black;
+    display: block;
+}
+#format img{width: 50px;
+height: 50px;
+}
 div img{
-    width: 300px;
-    height: 300px;
-    margin-left:20px ;
-    display: inline;
     
 }
 div{
     display: block;
 }
 
+.bubu {
+    position: absolute;
+    height: 300px;
+    width: 30%;
+    margin-top: 50px;
+    margin-right: 15px;
+    box-shadow: 0 0 10px 3px rgba(162, 172, 164, 0.7);
+    border-radius: 20px;
+    background-color: white;
+    text-align: center;
+    padding-top: 10px;
+  }
+  .bubu:hover{
+
+    box-shadow: 0 0 10px 10px rgba(5, 245, 37, 0.7);
+  }
+  form{
+      position: relative;
+      
+
+  }
+  #ViewResults{
+
+    position: absolute;
+    width: 100px;
+    height: 50px;
+    margin-left: 45%;
+font-style: italic;
+font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+    border-radius: 20px;
+    background-color: rgba(5, 245, 37, 0.7);
+
+
+  }
+  #result{
+      margin-top:200px ;
+  }
+  #ViewResults:hover{
+    background-image: url("https://i.pinimg.com/originals/79/90/fb/7990fb8d9b60e42c119df9c6a135d7ae.jpg");
+    color: ivory;
+  }

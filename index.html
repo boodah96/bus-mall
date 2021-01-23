@@ -1,50 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <header>
-        <h2>Welcome in bus-mall website to vote on our products</h2>
-        <form action="" id="maxAttempt">
-            <label for="rounds">Input number of rounds pleas:</label>
-            <input type="number" id="rounds" name="rounds" >
-            <input type="submit" value="submit">
-        </form>
+        <img id="logo" src="https://cdn.pixabay.com/photo/2014/03/25/15/18/shuttle-bus-296452_1280.png" alt="">
+        <br>
+
+        <h1>Bus Mall</h1>
 
     </header>
     <main>
         <br>
-        <br>
-        <div id="divImages">
-            <img  id="firstProductImage" src="" alt="">
-            <img id="secondProductImage" src=""  alt="">
-            <img id="thirdProductImage" src=""  alt="">
-            </div>
-            <br>
-            <form action=""id="result">
+        <div  id="format">
+            <h2>Welcome in bus-mall website to vote on our products</h2>
+
+            <form action="" id="maxAttempt">
+                <img  style="margin: 0 35%;" src="https://miro.medium.com/max/2048/1*bA5tEi6SKCZxvA_3xzSNIQ.gif" alt="">
+                <label style="margin: 0 25%;" for="rounds">Input number of rounds pleas:</label>
                 <br>
+                <input  style="margin: 0 27%;" type="number" id="rounds" name="rounds">
+                <br>
+                <input  style="margin: 0 35%;" type="submit" value="submit">
+            </form>
+        </div>
+        
+
+        <div style="background-color: #007700; height: 200px; width: 100% ;position: relative;" id="divImages">
+
+            <img style="margin-left: 1%" class="bubu" id="firstProductImage" src="" alt="">
+            <img style="margin-left: 33%" class="bubu" id="secondProductImage" src="" alt="">
+            <img style="margin-left: 65%" class="bubu" id="thirdProductImage" src="" alt="">
+        </div>
+
+        <form action="" id="result">
 
 
-                <input type="submit" value="View Results"  id="ViewResults">          
+            <input type="submit" value="View Results" id="ViewResults">
 
-</form>
-<ol id="results-list"></ol>
-<div class="chart">
-<canvas id="myChart" width="200px" height="200px"></canvas>
-</div>
+        </form>
+        <ol id="results-list"></ol>
+        <div class="chart">
+            <canvas id="myChart" width="200px" height="200px"></canvas>
+        </div>
     </main>
-   <footer>
+    <footer>
 
-   </footer>
+    </footer>
 
-   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>  
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script src="app.js"></script>
     <!-- push updates -->
 
 </body>
-</html>
 
+</html>
