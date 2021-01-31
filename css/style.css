@@ -13,7 +13,7 @@ header{
 }
 
 main{
-    font-family: 'Lobster', cursive;
+        font-family: 'Lobster', cursive;
 
     position: relative;
 
@@ -76,3 +76,28 @@ font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     background-image: url("https://i.pinimg.com/originals/79/90/fb/7990fb8d9b60e42c119df9c6a135d7ae.jpg");
     color: ivory;
   }
+  .over {
+    background-color: rgb(98, 0, 255);
+    padding: 20px;
+    width:500px ;
+    height: 500px;
+    display: none;
+
+  }
+  .hov  {
+    background-color: rgb(98, 0, 255);
+    padding: 20px;
+    width:500px ;
+    height: 500px;
+    
+   
+  }
+  .hov:hover{
+      display: none;
+  }
+    
+  .hov:hover + .over {
+    display: block;
+    float: right;
+  }
+ 
